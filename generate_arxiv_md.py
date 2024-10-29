@@ -225,11 +225,7 @@ def download_pdf(arxiv_id, filename):
     else:
         print(f"Failed to download PDF: {response.status_code}")
 
-
-if __name__ == "__main__":
-    # Read URLs from links.txt
-    with open('links.txt', 'r') as file:
-        entries = [line.strip() for line in file if line.strip()]  # Read lines and strip whitespace
+def run(entries):
     # Links should be in the format https://arxiv.org/pdf/<paper identifier>, https://arxiv.org/abs/<paper identifier>
     paper_ids = [entry.split('/')[-1] for entry in entries]
     bibtex_db = fetch_bibtex(paper_ids)
@@ -239,3 +235,11 @@ if __name__ == "__main__":
         with open(f"{metadata['key']}.md", "w") as f:
             f.write(generate_markdown_file(metadata))
         download_pdf(paper_id, f"{metadata['key']}.pdf")
+
+
+if __name__ == "__main__":
+    # Read URLs from links.txt
+    with open('links.txt', 'r') as file:
+        entries = [line.strip() for line in file if line.strip()]  # Read lines and strip whitespace
+    
+    run(entries)
