@@ -232,9 +232,9 @@ def run(entries):
     
     for paper_id in paper_ids:
         metadata = bibtex_db[paper_id]
-        with open(f"{metadata['key']}.md", "w") as f:
+        with open(f"./outputs/{metadata['key']}.md", "w") as f:
             f.write(generate_markdown_file(metadata))
-        download_pdf(paper_id, f"{metadata['key']}.pdf")
+        download_pdf(paper_id, f"./outputs/{metadata['key']}.pdf")
 
 
 if __name__ == "__main__":
